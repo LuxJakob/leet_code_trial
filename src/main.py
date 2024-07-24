@@ -2,37 +2,30 @@ from typing import List
 
 
 class LeetCode:
-    def run(self, nums: List[int]) -> List[int]:
-        nums.sort()
-        nums.reverse()
-        appearance_counter = 0
-        sorted_nums = []
+    def run(self, nums: List[int], target: int) -> List[int]:
+        numMap = {}
+        n = len(nums)
 
-        while nums:
-            appearance_counter += 1
-            inner_counter = 0
+        # Build the hash table
+        for i in range(n):
+            numMap[nums[i]] = i
 
-            for i in range(len(nums)):
-                if not nums or inner_counter == len(nums):
-                    break
+        # Find the complement
+        for i in range(n):
+            complement = target - nums[i]
+            if complement in numMap and numMap[complement] != i:
+                return [i, numMap[complement]]
 
-                counter = nums.count(nums[inner_counter])
-                if counter == appearance_counter:
-                    for j in range(appearance_counter):
-                        sorted_nums.append(nums[inner_counter])
-                        nums.remove(nums[inner_counter])
-
-                    inner_counter -= 1
-
-                inner_counter += 1
-
-        return sorted_nums
+        return []  # No solution found
 
 
 if __name__ == '__main__':
-    arguments = (
-        [-7, 8, -6, 9, -7, -6, -6, 8, 8]
+    argument_01 = (
+        [2,7,11,15]
+    )
+    argument_02 = (
+        9
     )
     leet_code_tester = LeetCode()
-    print(f'Your Input: {arguments}')
-    print(f'Your Output: {leet_code_tester.run(arguments)}')
+    print(f'Your Input: {argument_01, argument_02}')
+    print(f'Your Output: {leet_code_tester.run(argument_01, argument_02)}')
