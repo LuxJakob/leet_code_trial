@@ -1,62 +1,32 @@
+import math
 from typing import List
 
-TEST_INPUT_01 = "IV"
-TEST_INPUT_02 = "LVIII"
-TEST_INPUT_03 = "MCMXCIV"
-TEST_INPUT_04 = "III"
+TEST_INPUT_01 = [1,5,0,3,5]
+TEST_INPUT_02 = [0]
+TEST_INPUT_03 = [1,5,0,3,5]
+TEST_INPUT_04 = [0]
 
-EXPECTED_OUTPUT_01 = 4
-EXPECTED_OUTPUT_02 = 58
-EXPECTED_OUTPUT_03 = 1994
-EXPECTED_OUTPUT_04 = 3
+EXPECTED_OUTPUT_01 = 3
+EXPECTED_OUTPUT_02 = 0
+EXPECTED_OUTPUT_03 = 3
+EXPECTED_OUTPUT_04 = 0
 
 
 class LeetCode:
-    def run(self, s: str) -> int:
-        integer_numbers = []
-        integer_number = 0
-        temp = 0
-        roman_numbers = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000,
-        }
+    def run(self, nums: List[int]) -> int:
+        counter = 0
 
-        if not s:
-            return 0
-        for roman in s:
-            try:
-                roman_number = roman_numbers[roman]
-            except:
-                return 0
+        while True:
+            nums = [num for num in nums if num > 0]
 
-            integer_numbers.append(roman_number)
-
-        for number in integer_numbers:
-            if temp == 0:
-                integer_numbers_compressed = [number]
-                temp += 1
-            elif number == integer_numbers[temp - 1]:
-                integer_numbers_compressed[-1] += number
-                temp += 1
-            else:
-                integer_numbers_compressed.append(number)
-                temp += 1
-
-        integer_numbers_compressed.append(0)
-        for count, number in enumerate(integer_numbers_compressed):
-            if number == 0:
+            if not nums:
                 break
-            elif number > integer_numbers_compressed[count + 1]:
-                integer_number += number
-            else:
-                integer_number -= number
 
-        return integer_number
+            min_num = min(nums)
+            nums = [num - min_num for num in nums]
+            counter += 1
+
+        return counter
 
 
 if __name__ == '__main__':
