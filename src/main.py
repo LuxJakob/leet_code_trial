@@ -1,32 +1,26 @@
 import math
 from typing import List
 
-TEST_INPUT_01 = [1,5,0,3,5]
-TEST_INPUT_02 = [0]
-TEST_INPUT_03 = [1,5,0,3,5]
-TEST_INPUT_04 = [0]
+TEST_INPUT_01 = 121
+TEST_INPUT_02 = -121
+TEST_INPUT_03 = 1337
+TEST_INPUT_04 = 12121
 
-EXPECTED_OUTPUT_01 = 3
-EXPECTED_OUTPUT_02 = 0
-EXPECTED_OUTPUT_03 = 3
-EXPECTED_OUTPUT_04 = 0
+EXPECTED_OUTPUT_01 = True
+EXPECTED_OUTPUT_02 = False
+EXPECTED_OUTPUT_03 = False
+EXPECTED_OUTPUT_04 = True
 
 
 class LeetCode:
-    def run(self, nums: List[int]) -> int:
-        counter = 0
+    def run(self, x: int) -> bool:
+        if x < 0:
+            return False
 
-        while True:
-            nums = [num for num in nums if num > 0]
+        if str(x) == str(x)[::-1]:
+            return True
 
-            if not nums:
-                break
-
-            min_num = min(nums)
-            nums = [num - min_num for num in nums]
-            counter += 1
-
-        return counter
+        return False
 
 
 if __name__ == '__main__':
