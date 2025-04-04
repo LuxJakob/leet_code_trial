@@ -1,26 +1,29 @@
 import math
 from typing import List
 
-TEST_INPUT_01 = 121
-TEST_INPUT_02 = -121
-TEST_INPUT_03 = 1337
-TEST_INPUT_04 = 12121
+TEST_INPUT_01 = [1,2,3]
+TEST_INPUT_02 = [4,3,2,1]
+TEST_INPUT_03 = [9]
+TEST_INPUT_04 = [0]
 
-EXPECTED_OUTPUT_01 = True
-EXPECTED_OUTPUT_02 = False
-EXPECTED_OUTPUT_03 = False
-EXPECTED_OUTPUT_04 = True
+EXPECTED_OUTPUT_01 = [1,2,4]
+EXPECTED_OUTPUT_02 = [4,3,2,2]
+EXPECTED_OUTPUT_03 = [1,0]
+EXPECTED_OUTPUT_04 = [1]
 
 
 class LeetCode:
-    def run(self, x: int) -> bool:
-        if x < 0:
-            return False
-
-        if str(x) == str(x)[::-1]:
-            return True
-
-        return False
+    def run(self, digits: List[int]) -> List[int]:
+        output_str = ""
+        digits_plus = []
+        for num in digits:
+            output_str += str(num)
+        output_int  = int(output_str)
+        output_int += 1
+        output_str = str(output_int)
+        for num in output_str:
+            digits_plus.append(int(num))
+        return digits_plus
 
 
 if __name__ == '__main__':
